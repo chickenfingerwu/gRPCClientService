@@ -44,7 +44,7 @@ func (h *Handler) returnAllCustomers(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	response, err := h.c.GetAllCustomers(context.Background(), &service.GetAllReq{
-		DbName: "test_tb",
+		DbName: "Customer",
 	})
 	if err != nil {
 		log.Fatalf("Error when calling GetAllCustomers: %s", err)
@@ -52,16 +52,6 @@ func (h *Handler) returnAllCustomers(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Response from server: %s", response.Customer)
 	json.NewEncoder(w).Encode(response.Customer)
 
-	//out, err := proto.Marshal(response)
-	//if err != nil {
-	//	log.Fatalln("Failed to encode response from server: ", err)
-	//}
-	//
-	//
-	//_, werr := w.Write(out)
-	//if werr != nil {
-	//	log.Fatalln("Writing to client failed: ", werr)
-	//}
 }
 
 func main() {

@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+option go_package = "pbfile/service";
+
+package service;
+import "google/api/annotations.proto";
+
+service ServerService {
+  rpc AddCustomer(AddReq) returns (Confirmation) {
+    option (google.api.http) = {
+      post: "/customers"
+    };
+  }
+  rpc RetrieveCustomer(GetReq) returns (Customer) {
+    option (google.api.http) = {
+      get: "/customers/{id}"
+    };
+  }
+  rpc DeleteCustomer(DeleteReq) returns (Confirmation) {
+    option (google.api.http) = {
+      delete: "/customers/{id}"
+    };
+  }
+  rpc GetAllCustomers(GetAllReq) returns (Customers) {
+    option (google.api.http) = {
+      get: "/customers"
+    };
+  }
+}
+
+message GetAllReq {
+  string dbName = 1;
+}
+
+message AddReq {
+  string name = 1;
+  int64 id = 2;
+}
+
+message DeleteReq {
+  int64 id = 1;
+}
+
+message GetReq {
+  int64 id = 1;
+}
+
+message Confirmation {
+  string confirmation = 1;
+  int64 lastInsertID = 2;
+}
+
+message Customer {
+  int64 id = 1;
+  string name = 2;
+}
+
+message Customers {
+  repeated Customer customers = 1;
+}

@@ -7,5 +7,6 @@ RUN apt-get install vim -y
 #RUN export PATH="$PATH:$HOME/.local/bin"
 RUN go get -u "github.com/golang/protobuf/protoc-gen-go"
 RUN go get -u "github.com/go-sql-driver/mysql"
+RUN go get -u "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
 RUN go get "google.golang.org/grpc"
 RUN go get "golang.org/x/net/context"

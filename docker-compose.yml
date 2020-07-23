@@ -19,10 +19,11 @@ services:
       context: ./Go/server
     volumes:
       - "./Go/server:/go/tmp/src/server"
-    command: "go run /go/tmp/src/server/server.go"
+    command: "go run /go/tmp/src/server/gateway.go /go/tmp/src/server/server.go "
     container_name: golang_server
     ports:
       - "8080:8080"
+      - "8081:8081"
     tty: true
     depends_on:
       - db
@@ -42,7 +43,7 @@ services:
     build:
       context: ./Go/frontend
       dockerfile: Dockerfile
-    command: "npm start"
+    command: "npm start --verbose"
     container_name: frontend
     volumes:
       - './Go/frontend:/app'
@@ -52,3 +53,4 @@ services:
     tty: true
     environment:
       - CHOKIDAR_USEPOLLING=true
+
